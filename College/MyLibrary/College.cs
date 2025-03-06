@@ -8,18 +8,23 @@ namespace MyLibrary
 {
     public class College
     {
-        Student student = new Student("Пётр", 20);
-        
         Dictionary<string, List<string>> groups_ = new Dictionary<string, List<string>>();
 
-        void AddGroup(string group, List<string> students)
+        public void AddGroup(string name, List<string> Students)
         {
-            groups_.Add(group, students);
+            groups_.Add(name, Students);
         }
 
-        List<string> GetStudentGroup(string group) 
-        { 
-            return groups_[group];
+        public List<string> GetStudentGroup(string group) 
+        {
+            if (groups_.ContainsKey(group))
+            {
+                return null;
+            }
+            else
+            {
+                return new List<string>();
+            }
         }
     }
 }

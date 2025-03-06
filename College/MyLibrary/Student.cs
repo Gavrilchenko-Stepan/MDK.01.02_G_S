@@ -8,14 +8,7 @@ namespace MyLibrary
 {
     public class Student
     {
-        string name_;
-        int age_;
-        List<string> students;
-
-        public Student(string name, int age) 
-        { 
-            name_ = name;
-            age_ = age;
-        }
+        string Name_;
+        string Surname_;
     }
 }
