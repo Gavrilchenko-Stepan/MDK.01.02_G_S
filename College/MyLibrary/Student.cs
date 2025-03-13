@@ -9,6 +9,5 @@ namespace MyLibrary
     public class Student
     {
         string Name_;
-        string Surname_;
     }
 }
