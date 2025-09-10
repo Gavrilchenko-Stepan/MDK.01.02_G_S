@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyLib
 {
-    public interface IStubentRepository
+    public interface IStudentRepository
     {
         Student GetStudentID(int id);
         void SaveStudent(Student student);
