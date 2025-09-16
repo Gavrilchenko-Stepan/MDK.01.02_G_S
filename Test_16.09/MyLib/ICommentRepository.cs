@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MyLib
 {
-    public class User
+    public interface ICommentRepository
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        void AddComment(Comment comment);
+        List<Comment> GetUserComments(int userId);
     }
 }
