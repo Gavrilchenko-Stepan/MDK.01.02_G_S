@@ -10,5 +10,6 @@ namespace MyLib
     {
         void AddComment(Comment comment);
         List<Comment> GetUserComments(int userId);
+        List<Comment> GetAllComments();
     }
 }

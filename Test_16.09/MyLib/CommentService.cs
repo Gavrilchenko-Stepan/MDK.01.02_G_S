@@ -9,12 +9,10 @@ namespace MyLib
     public class CommentService
     {
         private readonly ICommentRepository _commentRepository;
-        private readonly IUserService _userService;
 
-        public CommentService(ICommentRepository commentRepository, IUserService userService)
+        public CommentService(ICommentRepository commentRepository)
         {
             _commentRepository = commentRepository;
-            _userService = userService;
         }
 
         public Comment AddComment(int userId, string text)
@@ -22,15 +20,10 @@ namespace MyLib
             if (string.IsNullOrEmpty(text))
                 throw new ArgumentException("Текст не может быть пустым");
 
-            if (!_userService.UserExists(userId))
-                throw new ArgumentException("Пользователь не найден");
-
-            var user = _userService.GetUser(userId);
             var comment = new Comment
             {
                 Text = text,
                 UserId = userId,
-                User = user
             };
 
             _commentRepository.AddComment(comment);
@@ -40,6 +33,22 @@ namespace MyLib
         public List<Comment> GetUserComments(int userId)
         {
             return _commentRepository.GetUserComments(userId);
+        }
+
+        public List<Comment> GetAllComments()
+        {
+            return _commentRepository.GetAllComments();
+        }
+
+        public List<Comment> SearchComments(string searchText)
+        {
+            if (string.IsNullOrEmpty(searchText))
+                return new List<Comment>();
+
+            var allComments = GetAllComments();
+
+            return allComments.Where(comment => comment.Text.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0)
+                .ToList();
         }
     }
 }
