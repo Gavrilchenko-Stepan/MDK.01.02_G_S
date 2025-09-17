@@ -13,6 +13,10 @@ namespace RegressiveTest
         public void AddComment_UserExists_CommentAdded()
         {
             var mockCommentRepo = new Mock<ICommentRepository>();
+            Comment savedComment = null;
+
+            mockCommentRepo.Setup(x => x.AddComment(It.IsAny<Comment>()))
+                  .Callback<Comment>(comment => savedComment = comment);
 
             var commentService = new CommentService(mockCommentRepo.Object);
 
@@ -23,7 +27,12 @@ namespace RegressiveTest
             Assert.AreEqual(1, result.UserId);
 
             mockCommentRepo.Verify(x => x.AddComment(It.IsAny<Comment>()), Times.Once);
-            //добавить проверку что точно комментарий кохранился в хранилище
+            //добавить проверку что точно комментарий сохранился в хранилище
+            Assert.IsNotNull(savedComment);
+            Assert.AreEqual("Шо вы делаете в моём холодильнике, вы хотети кушац?", savedComment.Text);
+            Assert.AreEqual(1, savedComment.UserId);
+            Assert.AreEqual(result.Text, savedComment.Text);
+            Assert.AreEqual(result.UserId, savedComment.UserId);
         }
 
         [TestMethod]
