@@ -7,7 +7,7 @@ namespace Commantary
         /// <summary>
         ///  ключ - логин пользователя, значение - комментарии
         /// </summary>
-        private Dictionary<string, List<string>> comments_ = new Dictionary<string, List<string>>();
+        private static Dictionary<string, List<string>> comments_ = new Dictionary<string, List<string>>();
 
         public Dictionary<string, List<string>> GetAllCommentaries()
         {
